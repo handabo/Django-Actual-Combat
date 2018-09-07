@@ -1,0 +1,186 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/home/home.css' %}">
+{% endblock %}
+
+{% block EXTJS %}
+    <script type="text/javascript" src="{% static 'app/home/js/home.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="home">
+        {#   顶部轮播       #}
+        <div class="swiper-container" id="topSwiper">
+            <div class="swiper-wrapper">
+                <!--处理轮播banner图-->
+                {% for wheel in mainwheels %}
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="{{ wheel.img }}" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+                <!-- 处理结束 -->
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+
+        </div>
+        {#         导航         #}
+        <div class="topMenu">
+            <nav>
+                <ul>
+                    <!-- 处理导航数据 -->
+                    {% for navs in mainnavs %}
+                        <li>
+                            <img src="{{ navs.img }}" alt="">
+                            <span>{{ navs.name }}</span>
+                        </li>
+                    <!--处理结束-->
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        {#         必购     #}
+        <div id="swiperMenu" class="swiper-container">
+
+            <ul class="swiper-wrapper">
+                <!-- 处理必购商品信息 -->
+                {% for mustbuys in mainmustbuys %}
+                    <li class="swiper-slide">
+                        <img src="{{ mustbuys.img }}" alt="">
+                    </li>
+                {% endfor %}
+                <!-- 处理结束 -->
+
+            </ul>
+
+        </div>
+        {#          商店    #}
+        <div class="CVS">
+            <!--处理第一个店铺的数据的图片-->
+            {% for shops in mainshops %}
+                {% ifequal forloop.counter 1 %}
+            <h2>
+                <img src="{{ shops.img }}" alt="">
+            </h2>
+                {% endifequal %}
+            {% endfor %}
+            <!--处理结束-->
+
+            <fieldset>
+                <!--处理第二个到第三个数据-->
+                {% for shops in mainshops %}
+                    {% if forloop.counter > 1 and forloop.counter < 4 %}
+                    <a href="#">
+                        <img src="{{ shops.img }}" alt="">
+                    </a>
+                    {% endif %}
+                {% endfor %}
+                <!--处理结束-->
+            </fieldset>
+
+            <ul>
+                <!--处理第四个到第七个数据-->
+                {% for shops in mainshops %}
+                    {% if forloop.counter > 3 and forloop.counter < 8 %}
+                    <li>
+                        <a href="#">
+                            <img src="{{ shops.img }}" alt="">
+                            <span></span>
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <!--处理结束-->
+
+            </ul>
+
+            <ol>
+                <!--处理第七个到第十一个数据-->
+                {% for shops in mainshops %}
+                    {% if forloop.counter > 7 and forloop.counter < 12 %}
+                    <li>
+                        <a href="#">
+                            <img src="{{ shops.img }}" alt="">
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <!--处理结束-->
+
+            </ol>
+
+        </div>
+
+        {#         主要显示 #}
+
+        <div class="mainInfo">
+            <!--商品展示-->
+            {% for shows in mainshows %}
+                <section>
+                    <h3><span></span><a href="#">更多&gt;</a></h3>
+
+                    <div>
+                        <a href="#">
+                            <img src="{{ shows.img }}" alt="">
+                        </a>
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                <img src="{{ shows.img1 }}" alt="">
+                                <p class="description">
+                                    {{ shows.longname1 }}
+                                </p>
+                                <span>{{ shows.price1 }}</span>
+                                <s>{{ shows.marketprice1 }}</s>
+                            </a>
+                            <button>
+                                <span>+</span>
+                            </button>
+                        </li>
+                       <li>
+                            <a href="#">
+                                <img src="{{ shows.img2 }}" alt="">
+                                <p class="description">
+                                    {{ shows.longname2 }}
+                                </p>
+                                <span>{{shows.price2}}</span>
+                                <s>{{ shows.marketprice2 }}</s>
+                            </a>
+                            <button>
+                                <span>+</span>
+                            </button>
+                        </li>
+                       <li>
+                            <a href="#">
+                                <img src="{{ shows.img3 }}" alt="">
+                                <p class="description">
+                                    {{ shows.longname3 }}
+                                </p>
+                                <span>{{ shows.price3 }}</span>
+                                <s>{{ shows.marketprice3 }}</s>
+                            </a>
+                            <button>
+                                <span>+</span>
+                            </button>
+                        </li>
+
+
+                    </ul>
+
+                </section>
+            {% endfor %}
+            <!--商品展示结束-->
+
+
+        </div>
+    </div>
+
+{% endblock %}
